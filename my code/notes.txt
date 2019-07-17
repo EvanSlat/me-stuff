@@ -2,7 +2,9 @@ exturnal set up-----------------------------------------------------------------
 go to file, setings, project interpreter for the aporpret project, is the library you want is not there
 press the "+" and then look up in the data base the library you want then import it
 
-
+to connect to github ether
+vcs git push
+vcs checkout git. get the link at github
 
 math --------------------------------------------------------------------------------------------------
 
