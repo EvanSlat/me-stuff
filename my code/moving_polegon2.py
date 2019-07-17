@@ -39,15 +39,17 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((1500, 600))
     clock = pygame.time.Clock()
-    side1 = Corner(100,100,screen)
-    side2 = Corner(100,400,screen)
-    side3 = Corner(400,400,screen)
+    for i in range(3):
+        side = Corner(100,i*100,screen)
+        sides = [side,side,side]
+    corner_location = []
 
 #have any one time things run here
 
 
 #this is the begining of the loop
     while True:
+        #print("testing")
         #clock.tick(60)
         screen.fill((0,0,0))
         #have what you want to be run here -player input
@@ -57,47 +59,46 @@ def main():
             #add player input into this section
             if event.type == pygame.QUIT:
                 sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONUP:
+                print("testing")
 # uses up down left righ
         if pressed_keys[pygame.K_UP]:
-            side1.move_y(1)
+            sides.move_y(1)
         if pressed_keys[pygame.K_DOWN]:
-            side1.move_y(-1)
+            sides.move_y(-1)
         if pressed_keys[pygame.K_LEFT]:
-            side1.move_x(-1)
+            sides.move_x(-1)
         if pressed_keys[pygame.K_RIGHT]:
-            side1.move_x(1)
+            sides.move_x(1)
 #uses w s a d
         if pressed_keys[pygame.K_w]:
-            side2.move_y(1)
+            sides[1].move_y(1)
         if pressed_keys[pygame.K_s]:
-            side2.move_y(-1)
+            sides[1].move_y(-1)
         if pressed_keys[pygame.K_a]:
-            side2.move_x(-1)
+            sides[1].move_x(-1)
         if pressed_keys[pygame.K_d]:
-            side2.move_x(1)
+            sides[1].move_x(1)
 # uses y h g j
         if pressed_keys[pygame.K_y]:
-            side3.move_y(1)
+            sides[2].move_y(1)
         if pressed_keys[pygame.K_h]:
-            side3.move_y(-1)
+            sides[2].move_y(-1)
         if pressed_keys[pygame.K_g]:
-            side3.move_x(-1)
+            sides[2].move_x(-1)
         if pressed_keys[pygame.K_j]:
-            side3.move_x(1)
-
-
-
-
-
-
-
+            sides[2].move_x(1)
       #  side3.move_x(1)
       #  side3.move_y(1)
        # side1.loop()
         #side2.loop()
         #side3.loop()
         #this should be last for it updates the screen
-        pygame.draw.polygon(screen,(155,155,155),((side1.x,side1.y),(side2.x,side2.y),(side3.x,side3.y)))
+        for side in sides:
+            #print(side1.x)
+            corner_location.append((side.x,side.y))
+        pygame.draw.polygon(screen,(155,155,155),(corner_location[0],corner_location[1],corner_location[2]))
 
         pygame.display.update()
 main()
