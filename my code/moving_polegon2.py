@@ -39,6 +39,7 @@ def main():
     pygame.init()
     screen = pygame.display.set_mode((1500, 600))
     clock = pygame.time.Clock()
+    current_corner = 0
     sides = []
     for i in range(4):
         side = Corner(100,i*100,screen)
@@ -60,38 +61,35 @@ def main():
             #add player input into this section
             if event.type == pygame.QUIT:
                 sys.exit()
-
+# make it so that corner come to the mouse
             if event.type == pygame.MOUSEBUTTONUP:
-                sides[3].x, sides[3].y = event.pos
-# uses up down left righ
-        if pressed_keys[pygame.K_UP]:
-            sides[0].move_y(1)
-          #  print('up')
-           # print(sides[0].y)
-            #print(sides)
-        if pressed_keys[pygame.K_DOWN]:
-            sides[0].move_y(-1)
-        if pressed_keys[pygame.K_LEFT]:
-            sides[0].move_x(-1)
-        if pressed_keys[pygame.K_RIGHT]:
-            sides[0].move_x(1)
-#uses w s a d
+                sides[current_corner].x, sides[current_corner].y = event.pos
+# select witch corner is being used
+            if pressed_keys[pygame.K_LEFT]:
+                current_corner -= 1
+                print(current_corner)
+            if pressed_keys[pygame.K_RIGHT]:
+                current_corner +=1
+            if current_corner > len(sides)-1:
+                current_corner = 0
+            if current_corner < 1:
+                current_corner = len(sides)-1
+#uses w s a d manuwal changung cir==orner location
         if pressed_keys[pygame.K_w]:
-            sides[1].move_y(1)
+            sides[current_corner].move_y(1)
         if pressed_keys[pygame.K_s]:
-            sides[1].move_y(-1)
+            sides[current_corner].move_y(-1)
         if pressed_keys[pygame.K_a]:
-            sides[1].move_x(-1)
+            sides[current_corner].move_x(-1)
         if pressed_keys[pygame.K_d]:
-            sides[1].move_x(1)
-# uses y h g j
+            sides[current_corner].move_x(1)
 
       #  side3.move_x(1)
       #  side3.move_y(1)
        # side1.loop()
         #side2.loop()
         #side3.loop()
-        #this should be last for it updates the screen
+        #this is the draw section
         corner_location = []
         for side in sides:
             #print(side1.x)
