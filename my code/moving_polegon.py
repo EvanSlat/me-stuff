@@ -37,12 +37,13 @@ def mouse_inputs():
 def main():
 #have variable set up and other sistem set up here
     pygame.init()
-    screen = pygame.display.set_mode((1500, 600))
+    screen = pygame.display.set_mode((1500, 800))
     clock = pygame.time.Clock()
     side1 = Corner(100,100,screen)
     side2 = Corner(100,400,screen)
     side3 = Corner(400,400,screen)
-
+    side4 = Corner(400, 400, screen)
+    side5 = Corner(400,400,screen)
 #have any one time things run here
 
 
@@ -84,7 +85,24 @@ def main():
             side3.move_x(-1)
         if pressed_keys[pygame.K_j]:
             side3.move_x(1)
-
+# USE o,L,k,;
+        if pressed_keys[pygame.K_o]:
+            side4.move_y(1)
+        if pressed_keys[pygame.K_l]:
+            side4.move_y(-1)
+        if pressed_keys[pygame.K_k]:
+            side4.move_x(-1)
+        if pressed_keys[pygame.K_SEMICOLON]:
+            side4.move_x(1)
+#use - [ p ]
+        if pressed_keys[pygame.K_MINUS]:
+            side5.move_y(1)
+        if pressed_keys[pygame.K_LEFTBRACKET]:
+            side5.move_y(-1)
+        if pressed_keys[pygame.K_p]:
+            side5.move_x(-1)
+        if pressed_keys[pygame.K_RIGHTBRACKET]:
+            side5.move_x(1)
 
 
 
@@ -97,7 +115,7 @@ def main():
         #side2.loop()
         #side3.loop()
         #this should be last for it updates the screen
-        pygame.draw.polygon(screen,(155,155,155),((side1.x,side1.y),(side2.x,side2.y),(side3.x,side3.y)))
+        pygame.draw.polygon(screen,(155,155,155),((side1.x,side1.y),(side2.x,side2.y),(side3.x,side3.y),(side4.x,side4.y),(side5.x,side5.y)))
 
         pygame.display.update()
 main()
