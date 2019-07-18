@@ -29,11 +29,11 @@ class Corner:
         elif self.y > self.screen.get_height():
             self.y = 0
 #add any other classes or functions here
-
+#-----------------------------------------------------------------------------
 def mouse_inputs():
     pass
 
-# this is the main start of the program
+# this is the main start of the program----------------------------------------------------------------------
 def main():
 #have variable set up and other sistem set up here
     pygame.init()
@@ -41,8 +41,8 @@ def main():
     clock = pygame.time.Clock()
     current_corner = 0
     sides = []
-    for i in range(4):
-        side = Corner(100,i*100,screen)
+    for i in range(3):
+        side = Corner(100,100,screen)
         sides.append(side)
     corner_location = []
     #print(len(sides))
@@ -78,6 +78,14 @@ def main():
             if current_corner < 0:
                 current_corner = len(sides)-1
                # print(current_corner)
+#adding and removing corners
+            if pressed_keys[pygame.K_UP] and event.type == pygame.KEYUP:
+                side = Corner(100, 100, screen)
+                sides.append(side)
+                current_corner = len(sides)-1
+            if pressed_keys[pygame.K_DOWN] and event.type == pygame.KEYUP and len(sides) > 3:
+                del sides[0]
+                current_corner = 0
 #uses w s a d manuwal changung cir==orner location
         if pressed_keys[pygame.K_w]:
             sides[current_corner].move_y(1)
@@ -100,6 +108,9 @@ def main():
             corner_location.append((side.x,side.y))
        #print(corner_location)
         pygame.draw.polygon(screen,(155,155,155),(corner_location))
+
+        # making it put a dot on the corner being controlled
+        pygame.draw.circle(screen,(255,255,255),(sides[current_corner].x,sides[current_corner].y),2)
 
         pygame.display.update()
 main()
