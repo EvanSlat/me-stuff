@@ -70,7 +70,7 @@ class PointControl:
         if pressed_keys[pygame.K_UP] and event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP and event.button == 3:
             side = Corner(100, 100, self.screen)
             self.sides.insert(self.current_corner,side)
-        if pressed_keys[pygame.K_DOWN] and event.type == pygame.KEYUP and len(self.sides) > 3:
+        if ((pressed_keys[pygame.K_DOWN] and event.type == pygame.KEYUP) or (event.type == pygame.MOUSEBUTTONUP)) and event.button == 2 and len(self.sides) > 3:
             del self.sides[self.current_corner]
             if self.current_corner > len(self.sides) - 1:
                 self.current_corner = 0
