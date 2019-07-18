@@ -36,7 +36,7 @@ class PointControl:
         self.current_corner = 0
         self.sides = sides
         self.screen = screen
-    def moving_points(self,pressed_keys):
+    def moving_points(self,pressed_keys,event):
         if pressed_keys[pygame.K_w]:
             self.sides[self.current_corner].move_y(1)
         if pressed_keys[pygame.K_s]:
@@ -45,6 +45,13 @@ class PointControl:
             self.sides[self.current_corner].move_x(-1)
         if pressed_keys[pygame.K_d]:
             self.sides[self.current_corner].move_x(1)
+        if event.type == pygame.MOUSEBUTTONUP and (event.button == 1 or event.button == 3):
+            self.sides[self.current_corner].x, self.sides[self.current_corner].y = event.pos
+#moving to mouse
+    def mouse_move(self,event):
+        if event.type == pygame.MOUSEBUTTONUP and (event.button == 1 or event.button == 3):
+            self.sides[self.current_corner].x, self.sides[
+                self.current_corner].y = event.pos
     #selectinve the points
     def corner_select(self,event,pressed_keys):
        # for event in pygame.event.get():
@@ -114,12 +121,11 @@ def main():
 # adding and removing corners
             point_control.add_points(event, pressed_keys)
 # make it so that corner come to the mouse
-            if event.type == pygame.MOUSEBUTTONUP and (event.button == 1 or event.button == 3):
-                point_control.sides[point_control.current_corner].x, point_control.sides[point_control.current_corner].y = event.pos
+            point_control.mouse_move(event)
 # select witch corner is being used
             point_control.corner_select(event,pressed_keys)
 #uses w s a d manuwal changung corner location
-        point_control.moving_points(pressed_keys)
+        point_control.moving_points(pressed_keys,event)
 #---------------------------------------------------------------------------------------side parts of control
 #make them all move
         if pressed_keys[pygame.K_u]:
@@ -134,5 +140,6 @@ def main():
 #------------------------------------drawling onto the screen
         #this is the draw section
         point_control.draw_poly()
+        pygame.draw.circle(screen,(0,0,255),(screen.get_width() // 2,screen.get_height()//2),2)
         pygame.display.update()
 main()

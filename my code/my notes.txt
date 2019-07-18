@@ -1,0 +1,52 @@
+------------------------------------------------------------------------------------------------------------------------
+section name section name section name section name section name section name section name section name section name
+------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+external set up external set up external set up external set up external set up external set up external set up
+------------------------------------------------------------------------------------------------------------------------
+go to file, setings, project interpreter for the aporpret project, is the library you want is not there
+press the "+" and then look up in the data base the library you want then import it
+
+to connect to github ether
+vcs git push
+vcs checkout git. get the link at github
+------------------------------------------------------------------------------------------------------------------------
+skeleton set up skeleton set up skeleton set up skeleton set up skeleton set up skeleton set up skeleton set up
+------------------------------------------------------------------------------------------------------------------------
+load in things
+    import libraries
+        import pygame
+        import sys
+    initial pygame
+       pygame.init()
+    set up screen
+       screen = pygame.display.set_mode((x, y))
+    update screen
+       pygame.display.update()
+    make "x" button work
+        if event.type == QUIT:
+            sys.exit()
+    load  images
+       image = pygame.image.load('fighter.png')
+    see keys
+       pressed_keys = pygame.key.get_pressed()
+    sound
+       pygame.mixer.music.load("file name here")
+       var = pygame.mixer.Sound("file name here")
+    set up channels
+       pygame.mixer.set_num_channels()
+    start time
+       time.time()
+    set up clock/fps
+       clock = pygame.time.Clock()
+    use clock/fps
+        clock.tick(60)
+
+set up parts
+    have a {main} function so their are no global variables
+    use {def name (parameters) } to set up functions
+------------------------------------------------------------------------------------------------------------------------
+input info input info input info input info input info input info input info input info input info input info input info
+------------------------------------------------------------------------------------------------------------------------
+only when button is released
+pygame.MOUSEBUTTONUP and event.button == # (1 m1, 2 m3, 3 m2, 4 scrole up, 5 scrole down)

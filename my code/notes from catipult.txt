@@ -45,7 +45,7 @@ for randome intigers
 
 set up lines ------------------------------------------------------------------------------------------------
 load up
-    inishat pygame
+    initial pygame
        pygame.init()
     set up screen
        screen = pygame.display.set_mode((x, y))
@@ -172,3 +172,9 @@ more practice with classes
 
 indexis work as
 '-' will look at the back
+------------------------------------------------------------------------------------------------------------------------
+input info input info input info input info input info input info input info input info input info input info input info
+------------------------------------------------------------------------------------------------------------------------
+only when button is relesed
+pygame.MOUSEBUTTONUP and event.button == # (1 m1, 2 m3, 3 m2, 4 scrole up, 5 scrole down)
+
