@@ -30,22 +30,58 @@ class Corner:
             self.y = 0
 #add any other classes or functions here
 #-----------------------------------------------------------------------------
-def mouse_inputs():
-    pass
-
+#moving the points
+class PointControl:
+    def __init__ (self,sides,screen):
+        self.current_corner = 0
+        self.sides = sides
+        self.screen = screen
+    def moving_points(self,pressed_keys):
+        if pressed_keys[pygame.K_w]:
+            self.sides[self.current_corner].move_y(1)
+        if pressed_keys[pygame.K_s]:
+            self.sides[self.current_corner].move_y(-1)
+        if pressed_keys[pygame.K_a]:
+            self.sides[self.current_corner].move_x(-1)
+        if pressed_keys[pygame.K_d]:
+            self.sides[self.current_corner].move_x(1)
+    #selectinve the points
+    def corner_select(self,event,pressed_keys):
+       # for event in pygame.event.get():
+        if pressed_keys[pygame.K_LEFT] and event.type == pygame.KEYUP:
+            self.current_corner -= 1
+        # print(current_corner)
+        if pressed_keys[pygame.K_RIGHT] and event.type == pygame.KEYUP:
+            self.current_corner += 1
+        # print(current_corner)
+        if self.current_corner > len(self.sides) - 1:
+            self.current_corner = 0
+            # print(current_corner)
+        if self.current_corner < 0:
+            self.current_corner = len(self.sides) - 1
+        #print(current_corner)
+    #added points
+    def add_points(self,event,pressed_keys):
+        if pressed_keys[pygame.K_UP] and event.type == pygame.KEYUP:
+            side = Corner(100, 100, self.screen)
+            self.sides.append(side)
+            current_corner = len(self.sides) - 1
+        if pressed_keys[pygame.K_DOWN] and event.type == pygame.KEYUP and len(self.sides) > 3:
+            del self.sides[0]
+            current_corner = 0
 # this is the main start of the program----------------------------------------------------------------------
 def main():
 #have variable set up and other sistem set up here
     pygame.init()
     screen = pygame.display.set_mode((600, 600))
     clock = pygame.time.Clock()
-    current_corner = 0
     sides = []
     for i in range(3):
         side = Corner(100,100,screen)
         sides.append(side)
     corner_location = []
     #print(len(sides))
+    point_control = PointControl(sides,screen)
 
 #have any one time things run here
 
@@ -64,53 +100,46 @@ def main():
                 sys.exit()
 # make it so that corner come to the mouse
             if event.type == pygame.MOUSEBUTTONUP:
-                sides[current_corner].x, sides[current_corner].y = event.pos
+                point_control.sides[point_control.current_corner].x, point_control.sides[point_control.current_corner].y = event.pos
 # select witch corner is being used
-            if pressed_keys[pygame.K_LEFT]and event.type == pygame.KEYUP:
-                current_corner -= 1
-               # print(current_corner)
-            if pressed_keys[pygame.K_RIGHT] and event.type == pygame.KEYUP:
-                current_corner +=1
-               # print(current_corner)
-            if current_corner > len(sides)-1:
-                current_corner = 0
-                #print(current_corner)
-            if current_corner < 0:
-                current_corner = len(sides)-1
-               # print(current_corner)
-#adding and removing corners
-            if pressed_keys[pygame.K_UP] and event.type == pygame.KEYUP:
-                side = Corner(100, 100, screen)
-                sides.append(side)
-                current_corner = len(sides)-1
-            if pressed_keys[pygame.K_DOWN] and event.type == pygame.KEYUP and len(sides) > 3:
-                del sides[0]
-                current_corner = 0
-#uses w s a d manuwal changung cir==orner location
-        if pressed_keys[pygame.K_w]:
-            sides[current_corner].move_y(1)
-        if pressed_keys[pygame.K_s]:
-            sides[current_corner].move_y(-1)
-        if pressed_keys[pygame.K_a]:
-            sides[current_corner].move_x(-1)
-        if pressed_keys[pygame.K_d]:
-            sides[current_corner].move_x(1)
 
-      #  side3.move_x(1)
-      #  side3.move_y(1)
+
+            point_control.corner_select(event,pressed_keys)
+
+            point_control.add_points(event,pressed_keys)
+#adding and removing corners
+
+#uses w s a d manuwal changung cir==orner location
+
+
+        point_control.moving_points(pressed_keys)
+#make them all move
+
+
+        if pressed_keys[pygame.K_u]:
+            for side in sides:
+                side.move_x(1)
+                side.move_y(1)
+      # make the corners loop  optionaly [q]
+        if pressed_keys[pygame.K_q]:
+            for side in sides:
+                side.loop()
+
+
        # side1.loop()
         #side2.loop()
         #side3.loop()
         #this is the draw section
         corner_location = []
-        for side in sides:
+        for side in point_control.sides:
             #print(side1.x)
             corner_location.append((side.x,side.y))
        #print(corner_location)
         pygame.draw.polygon(screen,(155,155,155),(corner_location))
 
         # making it put a dot on the corner being controlled
-        pygame.draw.circle(screen,(255,255,255),(sides[current_corner].x,sides[current_corner].y),2)
+        #print(current_corner)
+        pygame.draw.circle(screen,(255,255,255),(point_control.sides[point_control.current_corner].x,point_control.sides[point_control.current_corner].y),2)
 
         pygame.display.update()
 main()
