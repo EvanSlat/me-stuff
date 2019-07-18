@@ -36,7 +36,7 @@ class PointControl:
         self.current_corner = 0
         self.sides = sides
         self.screen = screen
-    def moving_points(self,pressed_keys,event):
+    def moving_points(self,pressed_keys):
         if pressed_keys[pygame.K_w]:
             self.sides[self.current_corner].move_y(1)
         if pressed_keys[pygame.K_s]:
@@ -45,8 +45,6 @@ class PointControl:
             self.sides[self.current_corner].move_x(-1)
         if pressed_keys[pygame.K_d]:
             self.sides[self.current_corner].move_x(1)
-        if event.type == pygame.MOUSEBUTTONUP and (event.button == 1 or event.button == 3):
-            self.sides[self.current_corner].x, self.sides[self.current_corner].y = event.pos
 #moving to mouse
     def mouse_move(self,event):
         if event.type == pygame.MOUSEBUTTONUP and (event.button == 1 or event.button == 3):
@@ -125,7 +123,7 @@ def main():
 # select witch corner is being used
             point_control.corner_select(event,pressed_keys)
 #uses w s a d manuwal changung corner location
-        point_control.moving_points(pressed_keys,event)
+        point_control.moving_points(pressed_keys)
 #---------------------------------------------------------------------------------------side parts of control
 #make them all move
         if pressed_keys[pygame.K_u]:
