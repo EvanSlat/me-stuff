@@ -37,7 +37,7 @@ def mouse_inputs():
 def main():
 #have variable set up and other sistem set up here
     pygame.init()
-    screen = pygame.display.set_mode((1500, 600))
+    screen = pygame.display.set_mode((600, 600))
     clock = pygame.time.Clock()
     current_corner = 0
     sides = []
@@ -45,6 +45,7 @@ def main():
         side = Corner(100,i*100,screen)
         sides.append(side)
     corner_location = []
+    #print(len(sides))
 
 #have any one time things run here
 
@@ -65,15 +66,18 @@ def main():
             if event.type == pygame.MOUSEBUTTONUP:
                 sides[current_corner].x, sides[current_corner].y = event.pos
 # select witch corner is being used
-            if pressed_keys[pygame.K_LEFT]:
+            if pressed_keys[pygame.K_LEFT]and event.type == pygame.KEYUP:
                 current_corner -= 1
-                print(current_corner)
-            if pressed_keys[pygame.K_RIGHT]:
+               # print(current_corner)
+            if pressed_keys[pygame.K_RIGHT] and event.type == pygame.KEYUP:
                 current_corner +=1
+               # print(current_corner)
             if current_corner > len(sides)-1:
                 current_corner = 0
-            if current_corner < 1:
+                #print(current_corner)
+            if current_corner < 0:
                 current_corner = len(sides)-1
+               # print(current_corner)
 #uses w s a d manuwal changung cir==orner location
         if pressed_keys[pygame.K_w]:
             sides[current_corner].move_y(1)
