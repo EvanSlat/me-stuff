@@ -48,10 +48,10 @@ class PointControl:
     #selectinve the points
     def corner_select(self,event,pressed_keys):
        # for event in pygame.event.get():
-        if pressed_keys[pygame.K_LEFT] and event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP and event.button == 4:
+        if pressed_keys[pygame.K_LEFT] and event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP and event.button == 5:
             self.current_corner -= 1
         # print(current_corner)
-        if pressed_keys[pygame.K_RIGHT] and event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP and event.button == 5:
+        if pressed_keys[pygame.K_RIGHT] and event.type == pygame.KEYUP or event.type == pygame.MOUSEBUTTONUP and event.button == 4:
             self.current_corner += 1
         # print(current_corner)
         if self.current_corner > len(self.sides) - 1:
@@ -67,7 +67,8 @@ class PointControl:
             self.sides.insert(self.current_corner,side)
         if pressed_keys[pygame.K_DOWN] and event.type == pygame.KEYUP and len(self.sides) > 3:
             del self.sides[self.current_corner]
-            self.current_corner = 0
+            if self.current_corner > len(self.sides) - 1:
+                self.current_corner = 0
     # the drawling
     def draw_poly(self):
         corner_location = []
