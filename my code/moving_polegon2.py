@@ -86,26 +86,32 @@ class PointControl:
             self.red += 1
         if pressed_keys[pygame.K_KP1]:
             self.red -= 1
+
         if pressed_keys[pygame.K_KP5]:
             self.green += 1
         if pressed_keys[pygame.K_KP2]:
             self.green -= 1
+
         if pressed_keys[pygame.K_KP6]:
             self.blue += 1
         if pressed_keys[pygame.K_KP3]:
             self.blue -= 1
+
         if self.red > 255:
             self.red = 255
         if self.red < 0:
             self.red = 0
+
         if self.green > 255:
             self.green = 255
         if self.green < 0:
             self.green = 0
+
         if self.blue > 255:
             self.blue = 255
         if self.blue < 0:
             self.blue = 0
+
     # the drawling
     def draw_poly(self):
         corner_location = []
@@ -160,7 +166,7 @@ def main():
             if pressed_keys[pygame.K_i] and event.type == pygame.KEYUP:
                 point_control = PointControl(screen)
                 poly_control.append(point_control)
-                current_poly += 1
+                current_poly = len(poly_control)-1
             if pressed_keys[pygame.K_k] and event.type == pygame.KEYUP and len(poly_control) > 1:
                 del poly_control[current_poly]
                 #print('delleted')
@@ -171,6 +177,11 @@ def main():
             if current_poly < 0:
                 current_poly = len(poly_control)-1
                 #print(current_poly)
+
+            if pressed_keys[pygame.K_SPACE]:
+                poly_control.append(poly_control[current_poly])
+                del poly_control[current_poly]
+                current_poly = len(poly_control)-1
 #---------------------------------------------------------------------------------------basic control over poligon
 # adding and removing corners
             poly_control[current_poly].add_points(event, pressed_keys)
