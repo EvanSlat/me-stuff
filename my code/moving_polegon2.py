@@ -82,7 +82,7 @@ class PointControl:
             # print(side1.x)
             corner_location.append((side.x, side.y))
         # print(corner_location)
-        pygame.draw.polygon(self.screen, (155, 155, self.color), (corner_location))
+        pygame.draw.polygon(self.screen, (self.color), (corner_location))
 
         # making it put a dot on the corner being controlled
         # print(current_corner)
@@ -101,7 +101,7 @@ def main():
         for i in range(3):
                 side = Corner(100,100,screen)
                 sides.append(side)
-        point_control = PointControl(sides, screen,100*e)
+        point_control = PointControl(sides, screen,(random.randint(0,255),random.randint(0,255),random.randint(0,255)))
         poly_control.append(point_control)
         sides = []
     corner_location = []
