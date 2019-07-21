@@ -83,19 +83,19 @@ class PointControl:
     #controling the color of the polygon
     def color_control(self,pressed_keys):
         if pressed_keys[pygame.K_KP4]:
-            self.red += 1
+            self.red += 2
         if pressed_keys[pygame.K_KP1]:
-            self.red -= 1
+            self.red -= 2
 
         if pressed_keys[pygame.K_KP5]:
-            self.green += 1
+            self.green += 2
         if pressed_keys[pygame.K_KP2]:
-            self.green -= 1
+            self.green -= 2
 
         if pressed_keys[pygame.K_KP6]:
-            self.blue += 1
+            self.blue += 2
         if pressed_keys[pygame.K_KP3]:
-            self.blue -= 1
+            self.blue -= 2
 
         if self.red > 255:
             self.red = 255
@@ -130,7 +130,7 @@ class PointControl:
 def main():
 #have variable set up and other sistem set up here
     pygame.init()
-    screen = pygame.display.set_mode((600, 600))
+    screen = pygame.display.set_mode((1500, 775))
     clock = pygame.time.Clock()
     poly_control = []
     current_poly = 0
