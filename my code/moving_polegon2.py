@@ -126,6 +126,23 @@ class PointControl:
     def draw_indicator(self):
         pygame.draw.circle(self.screen, (255, 255, 255), (self.sides[self.current_corner].x, \
                                                           self.sides[self.current_corner].y), 2)
+#-----------------------------------------------------------------------------the save function thing
+def save_screen(poly_control, current_poly,poly_number):
+    temp = ["start"]
+    for i in range(poly_number):
+        current_poly += 1
+        if current_poly > poly_number-1:
+            current_poly = 0
+        for side in poly_control[current_poly].sides:
+            temp.append([side.x, side.y])
+        temp.append('new poly')
+        temp.append(poly_control[current_poly].red)
+        temp.append(poly_control[current_poly].green)
+        temp.append(poly_control[current_poly].blue)
+
+    temp.append('stop')
+    print(temp)
+
 # this is the main start of the program----------------------------------------------------------------------
 def main():
 #have variable set up and other sistem set up here
@@ -182,6 +199,13 @@ def main():
                 poly_control.append(poly_control[current_poly])
                 del poly_control[current_poly]
                 current_poly = len(poly_control)-1
+
+            if pressed_keys[pygame.K_RETURN]:
+                save_screen(poly_control,current_poly,len(poly_control))
+#                for side in poly_control[current_poly].sides:
+ #                   print(side.x, side.y)
+  #              print("brake")
+
 #---------------------------------------------------------------------------------------basic control over poligon
 # adding and removing corners
             poly_control[current_poly].add_points(event, pressed_keys)
